@@ -1,3 +1,4 @@
 .idea/*
 daily_task_mg/migrations/*
 db.sqlite3
+*.pyc
