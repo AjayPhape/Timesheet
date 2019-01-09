@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+
+from datetime import date
 from django.contrib.contenttypes.fields import GenericForeignKey
 # Create your models here.
 
@@ -31,6 +33,8 @@ class Task(BaseModel):
 
 class TaskLine(BaseModel):
 	task = models.ForeignKey(Task, on_delete=models.SET_NULL, null=True)
+	work_date = models.DateField(default=date.today)
+	consumed_hours = models.IntegerField(null=True)
 
 	def __str__(self):
 		return str(self.name)
