@@ -14,8 +14,9 @@ class TaskLineView(APIView):
 	permission_classes = (AllowAny, )
 
 	def get(self, request):
-		lines = TaskLine.objects.all().order_by('work_date')
-		print(request.GET)
+		task_id = request.GET.get('task_id')
+		lines = TaskLine.objects.filter(task_id=task_id).order_by('work_date')
+		print(request.GET, task_id)
 		# if request.query_params:
 		# 	lines = TaskLine.objects.all() \
 		# 		.filter(name__contains=request.GET.get('name')) \
@@ -34,20 +35,26 @@ class TaskLineView(APIView):
 		).save()
 		return HttpResponse(status=201)
 
-	def put(self, request, rec_id):
+	def put(self, request):
+		rec_id = request.GET.get('rec_id')
+		print(rec_id)
 		line_obj = TaskLine.objects.filter(pk=rec_id)
-		line_obj.update(name=request.data.get('name'),
-						consumed_hours=request.data.get('consumed_hours'),
-						write_date=timezone.now(),
-						work_date=datetime.strptime(request.data.get('work_date').replace(".000Z", ""), "%Y-%m-%dT%H:%M:%S")
-						)
+		print(request.data.get('work_date'))
+		line_obj.update(
+			name=request.data.get('name'),
+			consumed_hours=request.data.get('consumed_hours'),
+			write_date=timezone.now(),
+			work_date=datetime.strptime(request.data.get('work_date').replace(".000Z", ""), "%Y-%m-%dT%H:%M:%S")
+			)
 		return HttpResponse(status=200)
 
-	def delete(self, request, rec_id):
+	def delete(self, request):
+		rec_id = request.GET.get('rec_id')
 		line_obj = TaskLine.objects.get(pk=rec_id)
 		line_obj.delete()
 		return HttpResponse(status=200)
 
 
-def view_timeline(request):
+def view_timeline(request, project_id=None, task_id=None):
+
 	return render(request, 'basic.html')

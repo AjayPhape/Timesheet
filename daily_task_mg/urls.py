@@ -19,6 +19,7 @@ from daily_task_mg import task_line_view
 urlpatterns = [
     path('view_timeline', task_line_view.view_timeline, name='view_timeline'),
     path('api/', task_line_view.TaskLineView.as_view()),
-    path('api/<int:rec_id>/', task_line_view.TaskLineView.as_view()),
+    path('api/?task_id=<int:task_id>/', task_line_view.TaskLineView.as_view()),
+    path('api/?rec_id=<int:rec_id>/', task_line_view.TaskLineView.as_view()),
 ]
 
