@@ -1,31 +1,44 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>jsGrid - Simple jQuery DataGrid - Demos</title>
-    <link rel="stylesheet" type="text/css" href="demos.css" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,600,400' rel='stylesheet' type='text/css'>
-</head>
-<body>
-    <div class="navigation">
-        <h1>jsGrid Demos</h1>
-        <ul>
-            <li><a href="basic.html" target="demo">Basic Scenario</a></li>
-            <li><a href="static-data.html" target="demo">Static Data</a></li>
-            <li><a href="odata-service.html" target="demo">OData Service</a></li>
-            <li><a href="data-manipulation.html" target="demo">Data Manipulation</a></li>
-            <li><a href="validation.html" target="demo">Validation</a></li>
-            <li><a href="sorting.html" target="demo">Sorting</a></li>
-            <li><a href="loading-by-page.html" target="demo">Loading by Page</a></li>
-            <li><a href="custom-view.html" target="demo">Custom View</a></li>
-            <li><a href="custom-row-renderer.html" target="demo">Custom Row Renderer</a></li>
-            <li><a href="external-pager.html" target="demo">External Pager</a></li>
-            <li><a href="custom-grid-field.html" target="demo">Custom Grid Field</a></li>
-            <li><a href="localization.html" target="demo">Localization</a></li>
-        </ul>
+{% load static %}
+<html lang="en-us">
+   <head>
+      <title>Datatables Alternative Editor</title>
+      {% block css %}
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/> 
+      <link rel="stylesheet" href="{% static 'DataTables-1.10.18/css/jquery.dataTables.min.css'%}"/>
+      <link rel="stylesheet" href="{% static '/Buttons-1.5.4/css/buttons.dataTables.min.css'%}"/>
+      <link rel="stylesheet" href="{% static '/Select-1.2.6/css/select.dataTables.min.css'%}"/>
+      <link rel="stylesheet" href="{% static '/Responsive-2.2.2/css/responsive.dataTables.min.css'%}"/>
+      <style>
+        table.dataTable tbody>tr.selected,
+        table.dataTable tbody>tr>.selected {
+          background-color: #A2D3F6;
+        }
+      </style>
+       {% endblock %}
+   </head>
+   <body>
+
+    <div class="container">
+      <br>
+      <table cellpadding="0" cellspacing="0" border="0" class="dataTable table table-striped" id="example">
+
+      </table>
+      <br>
     </div>
-    <div class="demo-frame">
-        <iframe name="demo" src="basic.html"></iframe>
-    </div>
-</body>
+
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'DataTables-1.10.18/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/altEditor/dataTables.altEditor.free.js' %}"></script>
+    <script src="{% static 'Buttons-1.5.4/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'Select-1.2.6/js/dataTables.select.min.js' %}"></script>
+    <script src="{% static 'Responsive-2.2.2/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'js/timeline.js' %}"></script>
+
+    <script>
+
+    </script>
+
+   </body>
 </html>
