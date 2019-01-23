@@ -17,7 +17,7 @@
         var myTable = $('#example').DataTable({
           "sPaginationType": "full_numbers",
           "ajax": {
-                    "url":"http://10.200.234.215:9000/timesheet/api/?task_id=1",
+                    "url":"http://10.200.234.215:9000/timesheet/api/",
                     "type": "GET",
                     "params": {"task_id":1}
           },
@@ -49,9 +49,14 @@
             $.ajax({
                 'url': "http://10.200.234.215:9000/timesheet/api/",
                 'method': "POST",
+                'async': false,
                 'data': {"consumed_hours":$('[id="Consumed Hours"]').val(),
                         "work_date":$('[id="Work Date"]').val(),
-                        "name":$('#Name').val()}
+                        "name":$('#Name').val()},
+                'success': function(res){
+                    console.log(res)
+                    $('#rec_ID').val(res)
+                }
             });
         });
 

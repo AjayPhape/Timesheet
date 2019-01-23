@@ -30,13 +30,14 @@ class TaskLineView(APIView):
 
 	def post(self, request):
 		# print(datetime.strptime(request.data.get('work_date').replace(".000Z", ""), "%Y-%m-%dT%H:%M:%S"))
-		TaskLine.objects.create(
+		line_obj = TaskLine.objects.create(
 			name=request.data.get('name'),
 			consumed_hours=request.data.get('consumed_hours'),
 			write_date=timezone.now(),
 			# work_date=datetime.strptime(request.data.get('work_date').replace(".000Z", ""), "%Y-%m-%dT%H:%M:%S"),
-		).save()
-		return HttpResponse(status=201)
+		)
+		line_obj.save()
+		return HttpResponse(json.dumps(line_obj.id), status=201)
 
 	def put(self, request):
 		rec_id = request.data.get('rec_id')
