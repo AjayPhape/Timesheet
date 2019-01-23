@@ -1,8 +1,11 @@
       $(document).ready(function() {
 
-
-        $('#altEditor-modal [id="Work Date"]').attr({'type':'date'});
         var data_list= [];
+        var task_id = $('#task_id').val()
+
+        $('#id_task').val(task_id)
+        $('#id_task').attr('disabled',true)
+
         var columnDefs = [{
         title:"rec_ID", visible: false,
         searchable:false}, {
@@ -11,15 +14,16 @@
           title: "Consumed Hours"
         }, {
           title: "Work Date",
+          type: "date"
         }
         ];
 
-        var myTable = $('#example').DataTable({
+        var myTable = $('#task_line').DataTable({
           "sPaginationType": "full_numbers",
           "ajax": {
-                    "url":"http://10.200.234.215:9000/timesheet/api/",
+                    "url":"http://10.200.234.215:9000/timesheet/api/task_line/",
                     "type": "GET",
-                    "params": {"task_id":1}
+                    "data": {"task_id":task_id}
           },
           columns: columnDefs,
           dom: 'Bfrtip',        // Needs button container
@@ -47,12 +51,13 @@
         });
         $('#altEditor-modal').on('click', '#addRowBtn', function(e){
             $.ajax({
-                'url': "http://10.200.234.215:9000/timesheet/api/",
+                'url': "http://10.200.234.215:9000/timesheet/api/task_line/",
                 'method': "POST",
                 'async': false,
                 'data': {"consumed_hours":$('[id="Consumed Hours"]').val(),
                         "work_date":$('[id="Work Date"]').val(),
-                        "name":$('#Name').val()},
+                        "name":$('#Name').val(),
+                        "task_id":task_id},
                 'success': function(res){
                     console.log(res)
                     $('#rec_ID').val(res)
@@ -67,7 +72,7 @@
             console.log($('[id="id"]').val());
 
             $.ajax({
-                'url': "http://10.200.234.215:9000/timesheet/api/",
+                'url': "http://10.200.234.215:9000/timesheet/api/task_line/",
                 'method': "PUT",
                 'data': {"rec_id":$('[id="rec_ID"]').val(),
                         "consumed_hours":$('[id="Consumed Hours"]').val(),
@@ -78,7 +83,7 @@
 
         $('#altEditor-modal').on('click', '#deleteRowBtn', function(e){
             $.ajax({
-                'url': "http://10.200.234.215:9000/timesheet/api/",
+                'url': "http://10.200.234.215:9000/timesheet/api/task_line/",
                 'method': "DELETE",
                 'data': {"rec_id":$('[id="rec_ID"]').val()}
             });

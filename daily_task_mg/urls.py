@@ -14,12 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from daily_task_mg import task_line_view
+from daily_task_mg import task_line_view, task
 
 urlpatterns = [
-    path('view_timeline', task_line_view.view_timeline, name='view_timeline'),
-    path('api/', task_line_view.TaskLineView.as_view()),
-    path('api/?task_id=<int:task_id>/', task_line_view.TaskLineView.as_view()),
-    path('api/?rec_id=<int:rec_id>/', task_line_view.TaskLineView.as_view()),
+    path('task_line', task_line_view.view_timeline, name='task_line'),
+    path('task_line/<int:task_id>', task_line_view.view_timeline),
+    path('api/task_line/', task_line_view.TaskLineView.as_view()),
+
+    path('task', task.view_task, name='task'),
+    path('api/task/', task.TaskView.as_view()),
 ]
 

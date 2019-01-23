@@ -251,10 +251,17 @@
 
          for( var i = 0; i < dt.context[0].aoColumns.length; i++ )
          {
-            var fld_type = "text"
+             var fld_type = "text"
              if (dt.context[0].aoColumns[i].bVisible == false){
                 fld_type = "hidden";
              }
+             else if (dt.context[0].aoColumns[i].sType == 'date'){
+                fld_type = "date";
+             }
+             else if (dt.context[0].aoColumns[i].sType == 'num'){
+                fld_type = "number";
+             }
+             console.log("dt.context[0].aoColumns[i].sType", dt.context[0].aoColumns[i])
             columnDefs.push({ title: dt.context[0].aoColumns[i].sTitle, fld_type: fld_type})
          }
 
@@ -266,7 +273,6 @@
           var data = "";
 
           data += "<form name='altEditor-form' role='form'>";
-          console.log("columnDefs", dt.context[0].aoColumns)
           for (var j in columnDefs) {
             data += "<div class='form-group'><div class='col-sm-3 col-md-3 col-lg-3 text-right' style='padding-top:7px;'><label for='" + columnDefs[j].title + "'>" + columnDefs[j].title + ":</label></div><div class='col-sm-9 col-md-9 col-lg-9'><input type='"+columnDefs[j].fld_type+"'  id='" + columnDefs[j].title + "' name='" + columnDefs[j].title + "' placeholder='" + columnDefs[j].title + "' style='overflow:hidden'  class='form-control  form-control-sm' value='" + adata.data()[0][j] + "'></div><div style='clear:both;'></div></div>";
 
@@ -387,8 +393,17 @@
 
          for( var i = 0; i < dt.context[0].aoColumns.length; i++ )
          {
-            columnDefs.push({ title: dt.context[0].aoColumns[i].sTitle })
-            console.log("dt.context[0].aoColumns[i]", dt.context[0].aoColumns[i].sType)
+             var fld_type = "text"
+             if (dt.context[0].aoColumns[i].bVisible == false){
+                fld_type = "hidden";
+             }
+             else if (dt.context[0].aoColumns[i].sType == 'date'){
+                fld_type = "date";
+             }
+             else if (dt.context[0].aoColumns[i].sType == 'num'){
+                fld_type = "number";
+             }
+            columnDefs.push({ title: dt.context[0].aoColumns[i].sTitle, fld_type: fld_type})
          }
 
 
@@ -397,7 +412,7 @@
           data += "<form name='altEditor-form' role='form'>";
 
           for (var j in columnDefs) {
-            data += "<div class='form-group'><div class='col-sm-3 col-md-3 col-lg-3 text-right' style='padding-top:7px;'><label for='" + columnDefs[j].title + "'>" + columnDefs[j].title + ":</label></div><div class='col-sm-9 col-md-9 col-lg-9'><input type='text'  id='" + columnDefs[j].title + "' name='" + columnDefs[j].title + "' placeholder='" + columnDefs[j].title + "' style='overflow:hidden'  class='form-control  form-control-sm' value=''></div><div style='clear:both;'></div></div>";
+            data += "<div class='form-group'><div class='col-sm-3 col-md-3 col-lg-3 text-right' style='padding-top:7px;'><label for='" + columnDefs[j].title + "'>" + columnDefs[j].title + ":</label></div><div class='col-sm-9 col-md-9 col-lg-9'><input type='"+columnDefs[j].fld_type+"'  id='" + columnDefs[j].title + "' name='" + columnDefs[j].title + "' placeholder='" + columnDefs[j].title + "' style='overflow:hidden'  class='form-control  form-control-sm' value=''></div><div style='clear:both;'></div></div>";
 
           }
           data += "</form>";
