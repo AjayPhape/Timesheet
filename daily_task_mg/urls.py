@@ -17,8 +17,8 @@ from django.urls import path
 from daily_task_mg import task_line_view, task
 
 urlpatterns = [
-    path('task_line', task_line_view.view_timeline, name='task_line'),
-    path('task_line/<int:task_id>', task_line_view.view_timeline),
+    path('task_line', task_line_view.view_taskline, name='task_line'),
+    path('task_line/<int:task_id>', task_line_view.view_taskline),
     path('api/task_line/', task_line_view.TaskLineView.as_view()),
 
     path('task', task.view_task, name='task'),

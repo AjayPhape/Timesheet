@@ -6,16 +6,16 @@
         $('#id_task').val(task_id)
         $('#id_task').attr('disabled',true)
 
-        var columnDefs = [{
-        title:"rec_ID", visible: false,
-        searchable:false}, {
-          title: "Name"
-        }, {
-          title: "Consumed Hours"
-        }, {
-          title: "Work Date",
-          type: "date"
-        }
+        var columnDefs = [
+                    {
+                    title:"rec_ID",
+                    visible: false,
+                    searchable:false,
+                    },
+                    {title: "Name"},
+                    {title: "Consumed Hours"},
+                    {title: "Work Date",
+                    type: "date"}
         ];
 
         var myTable = $('#task_line').DataTable({
@@ -49,6 +49,7 @@
          }]
 
         });
+
         $('#altEditor-modal').on('click', '#addRowBtn', function(e){
             $.ajax({
                 'url': "http://10.200.234.215:9000/timesheet/api/task_line/",

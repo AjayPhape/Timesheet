@@ -1,11 +1,33 @@
+function format ( d ) {
+    console.log("DDDDDDD", d)
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Task name:</td>'+
+            '<td>'+d[2]+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Description:</td>'+
+            '<td>'+d[3]+'</td>'+
+        '</tr>'+
+    '</table>';
+}
+
+
+
 $(document).ready(function() {
 
 var data_list= [];
-var columnDefs = [{
-title:"rec_ID", visible: false,
-searchable:false}, {
-  title: "Name"
-}
+var columnDefs = [
+            {
+                className: 'details-control',
+                orderable: false,
+                data: null,
+                defaultContent: '',
+                width:'1%'},
+            {
+                title: "Name"
+            }
 ];
 
 var myTable = $('#task').DataTable({
@@ -20,9 +42,9 @@ var myTable = $('#task').DataTable({
   select: 'single',
   responsive: true,
   altEditor: true,     // Enable altEditor
-  "fnCreatedRow": function( nRow, aData, iDataIndex ) {
-        $(nRow).attr('id', aData[aData.length-1]);
-    },
+//  "fnCreatedRow": function( nRow, aData, iDataIndex ) {
+//        $(nRow).attr('id', aData[aData.length-1]);
+//    },
   buttons: [{
     text: 'Add',
     name: 'add'        // do not change name
@@ -39,6 +61,24 @@ var myTable = $('#task').DataTable({
  }]
 
 });
+
+
+$('#task tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = myTable.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+});
+
 $('#altEditor-modal').on('click', '#addRowBtn', function(e){
     $.ajax({
         'url': "http://10.200.234.215:9000/timesheet/api/task/",

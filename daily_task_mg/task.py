@@ -19,7 +19,7 @@ class TaskView(APIView):
 
 	def get(self, request):
 		task_id = request.query_params.get('project_id')
-		data = Task.objects.all().order_by('create_date').values_list('id', 'name')
+		data = Task.objects.all().order_by('create_date').values_list('id', 'name', 'description')
 		print(request.GET, task_id)
 		# if request.query_params:c
 		# 	lines = Task.objects.all() \

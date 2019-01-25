@@ -14,6 +14,13 @@
         table.dataTable tbody>tr>.selected {
           background-color: #A2D3F6;
         }
+        td.details-control {
+            background: url("{% static 'img/details_open.png'%}") no-repeat center center;
+            cursor: pointer;
+        }
+        tr.shown td.details-control {
+            background: url("{% static 'img/details_close.png'%}") no-repeat center center;
+        }
       </style>
        {% endblock %}
    </head>

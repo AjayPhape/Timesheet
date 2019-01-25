@@ -19,7 +19,6 @@ class TaskLineView(APIView):
 
 	def get(self, request):
 		task_id = request.GET.get('task_id')
-		# import pdb;pdb.set_trace()
 		data = TaskLine.objects.filter(task_id=task_id).order_by('work_date').values_list('id', 'name', 'consumed_hours', 'work_date')
 		print(request.GET, task_id)
 		# if request.query_params:c
@@ -63,6 +62,6 @@ class TaskLineView(APIView):
 		return HttpResponse(status=200)
 
 
-def view_timeline(request, task_id=None):
+def view_taskline(request, task_id=None):
 	task_line_form = TaskLineForm()
-	return render(request, 'index.html', {'task_line_form': task_line_form, 'task_id':task_id})
+	return render(request, 'task_line.html', {'task_line_form': task_line_form, 'task_id':task_id})
