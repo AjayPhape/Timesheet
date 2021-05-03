@@ -1,4 +1,6 @@
 .idea/*
-daily_task_mg/migrations/*
+task_management/migrations/*
 db.sqlite3
 *.pyc
+__pycache__/
+migrations/
